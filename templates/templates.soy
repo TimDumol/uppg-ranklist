@@ -1,0 +1,18 @@
+{namespace tmpl}
+
+/**
+ * Renders the User
+ * @param user The User
+ */
+{template .user}
+<tr>
+  <td>{$user.name}</td>
+  <td>{$user.uva.rank}</td>
+  <td>{$user.uva.lrank}</td>
+  <td>{$user.uva.id}</td>
+  <td>{$user.uva.username}</td>
+  <td>{$user.uva.ac}</td>
+  <td>{$user.uva.nos}</td>
+  <td>{$user.uva.tried}</td>
+</tr>
+{/template}

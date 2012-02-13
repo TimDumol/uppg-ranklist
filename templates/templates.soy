@@ -10,13 +10,13 @@
   <td>{$user.uva.rank}</td>
   <td>{$user.uva.lrank}</td>
   <td>{$user.uva.id}</td>
-  <td>{$user.uva.username}</td>
+  <td><a href="http://uhunt.felix-halim.net/id/{$user.uva.id}">{$user.uva.username}</a></td>
   <td>{$user.uva.ac}</td>
   <td>{$user.uva.nos}</td>
   <td>{$user.uva.tried}</td>
   {if $user.euler.id}
       <td>{$user.euler.lrank}</td>
-      <td>{$user.euler.id}</td>
+      <td><a href="http://projecteuler.net/profile/{$user.euler.id}.png">{$user.euler.id}</a></td>
       <td>{$user.euler.solved}</td>
   {else}
       <td></td>

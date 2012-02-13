@@ -10,7 +10,7 @@ JS=bootstrap-alerts.js bootstrap-buttons.js bootstrap-dropdown.js\
 	 bootstrap-modal.js bootstrap-popover.js bootstrap-scrollspy.js\
 	 bootstrap-tabs.js bootstrap-twipsy.js libs/jquery-1.7.1.js site/main.js\
 	 libs/es5-shim.js libs/humane.js site/templates.js libs/underscore.js\
-	 libs/soyutils.js
+	 libs/soyutils.js site/users.json
 JS_FULL=${JS:%=build/js/%}
 all: build $(JS_FULL) 
 
@@ -32,6 +32,9 @@ build:
 
 build/js/%.js: js/%.js
 	mkdir -p "`dirname $@`" && [ "${DEBUG}" ] && cp $< $@ || uglifyjs -o $@ $<
+
+build/js/%.json: js/%.json
+	mkdir -p "`dirname $@`" && cp $< $@
 
 js/site/templates.js: templates/templates.soy
 	java -jar templates/SoyToJsSrcCompiler.jar --outputPathFormat js/site/templates.js \

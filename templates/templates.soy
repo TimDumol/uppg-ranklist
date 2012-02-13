@@ -14,5 +14,14 @@
   <td>{$user.uva.ac}</td>
   <td>{$user.uva.nos}</td>
   <td>{$user.uva.tried}</td>
+  {if $user.euler.id}
+      <td>{$user.euler.lrank}</td>
+      <td>{$user.euler.id}</td>
+      <td>{$user.euler.solved}</td>
+  {else}
+      <td></td>
+      <td></td>
+      <td></td>
+  {/if}
 </tr>
 {/template}

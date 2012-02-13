@@ -3,6 +3,8 @@
 /**
  * Renders the User
  * @param user The User
+ * @param lastUvaSub last uva submission
+ * @param lastUvaSubHumane last uva submission - humaneDate
  */
 {template .user}
 <tr>
@@ -14,6 +16,7 @@
   <td>{$user.uva.ac}</td>
   <td>{$user.uva.nos}</td>
   <td>{$user.uva.tried}</td>
+  <td><a title="{$lastUvaSub}">{$lastUvaSubHumane}</a></td>
   {if $user.euler.id}
       <td>{$user.euler.lrank}</td>
       <td><a href="http://projecteuler.net/profile/{$user.euler.id}.png">{$user.euler.id}</a></td>

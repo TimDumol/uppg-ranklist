@@ -6,9 +6,9 @@ BOOTSTRAP_LESS = ./less/bootstrap.less
 LESS_COMPRESSOR ?= `which lessc`
 UGLIFY_JS ?= `which uglifyjs`
 WATCHR ?= `which watchr`
-JS=bootstrap-alerts.js bootstrap-buttons.js bootstrap-dropdown.js\
+JS=bootstrap-alert.js bootstrap-button.js bootstrap-dropdown.js\
 	 bootstrap-modal.js bootstrap-popover.js bootstrap-scrollspy.js\
-	 bootstrap-tabs.js bootstrap-twipsy.js libs/jquery-1.7.1.js site/main.js\
+	 bootstrap-tab.js libs/jquery-1.7.1.js site/main.js\
 	 libs/es5-shim.js libs/humane.js site/templates.js libs/underscore.js\
 	 libs/soyutils.js site/users.json
 JS_FULL=${JS:%=build/js/%}

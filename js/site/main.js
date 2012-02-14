@@ -51,7 +51,8 @@ $(function() {
           // Get problem submissions for last submisson
           return $.when($.get('http://uhunt.felix-halim.net/api/subs/' + self.id).
           done(function(data) {
-            data.subs = $.parseJSON(data.subs);
+            if (typeof(data) === 'string') data = $.parseJSON(data);
+            if (typeof(data.subs) === 'string') data.subs = $.parseJSON(data.subs);
             $.extend(self, data);
             self.subs.sort(function(x,y) { return x[4] - y[4]; });
             self.tried = 0;
@@ -67,6 +68,7 @@ $(function() {
           // Get ranklist for other stats
           $.get('http://uhunt.felix-halim.net/api/ranklist/' +
               self.id + '/0/0').done(function(data) {
+              if (typeof(data) === 'string') data = $.parseJSON(data);
               $.extend(self, data[0]);
           }));
         } else {

@@ -29,10 +29,22 @@ $(function() {
         $.extend(user.uva, attrs.uva);
         delete attrs.uva;
       }
+      if (typeof(attrs.uva_id) !== 'undefined') {
+        user.uva.id = attrs.uva_id;
+        delete attrs.uva_id;
+      }
       user.euler = Object.create(User.euler);
       if (typeof(attrs.euler) === 'object') {
         $.extend(user.euler, attrs.euler);
         delete attrs.euler;
+      }
+      if (typeof(attrs.euler_id) !== 'undefined') {
+        user.euler.id = attrs.euler_id;
+        delete attrs.euler_id;
+      }
+      if (typeof(attrs.euler_solved) !== 'undefined') {
+        user.euler.solved = attrs.euler_solved;
+        delete attrs.euler_solved;
       }
       // Copy everything else
       $.extend(user, attrs);
@@ -180,17 +192,11 @@ $(function() {
     });
   };
 
-  $.ajax({
-      url: 'js/site/users.json',
-      type: 'GET',
-      dataType: 'json'
-  }).done(function(userJSON) {
-    users = Users.create({
-        list: $.map(userJSON, function(x) { return User.create(x); })
-    });
-    users.el = $('#users tbody');
-    updateAndRenderAll();
-    $('#refresh-rankings').click(updateAndRenderAll);
+  users = Users.create({
+    list: $.map(userJSON, function(x) { return User.create(x); })
   });
+  users.el = $('#users tbody');
+  updateAndRenderAll();
+  $('#refresh-rankings').click(updateAndRenderAll);
 
 });

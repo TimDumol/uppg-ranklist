@@ -28,7 +28,13 @@
     $dbh = new PDO($db_info, $db_user, $db_password, array(
       PDO::ATTR_PERSISTENT => true
     ));
-    
+
+    $stmt = $dbh->prepare("SELECT name, uva_id, euler_id, euler_solved FROM ranks");
+    if ($stmt->execute()) {
+      echo 'userJSON = ', json_encode($stmt->fetchAll());
+    }
+
+    $dbh = null;
     ?>
   </script>
   <script type="text/javascript" src="js/site/main.js"></script>

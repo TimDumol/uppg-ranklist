@@ -22,6 +22,15 @@
   <script type="text/javascript" src="js/libs/humane.js"></script>
   <script type="text/javascript" src="js/libs/soyutils.js"></script>
   <script type="text/javascript" src="js/site/templates.js"></script>
+  <script type="text/javsacript">
+    <?php
+    require_once 'config.php';
+    $dbh = new PDO($db_info, $db_user, $db_password, array(
+      PDO::ATTR_PERSISTENT => true
+    ));
+    
+    ?>
+  </script>
   <script type="text/javascript" src="js/site/main.js"></script>
 </head>
 

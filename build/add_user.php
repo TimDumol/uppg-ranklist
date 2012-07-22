@@ -49,7 +49,6 @@ if ($method === 'POST' || $method === 'GET') {
             $dbh = new PDO($db_info, $db_user, $db_password, array(
                 PDO::ATTR_PERSISTENT => true
             ));
-            print_r($_POST);
             $stmt = $dbh->prepare("INSERT INTO ranks (name, uva_id, euler_id, retired, probie) VALUES (:name, :uva_id, :euler_id, :retired, :probie)");
             $name = $_POST['name'];
             $uva_id = $_POST['uva_id'];
@@ -65,7 +64,6 @@ if ($method === 'POST' || $method === 'GET') {
                 echo '<p>Successfully added user</p>';
             } else {
                 echo '<p>Failed to add user:</p>';
-                print_r($dbh->errorInfo());
                 echo '<p>' . $dbh->errorInfo()[1] . '</p>';
             }
         }

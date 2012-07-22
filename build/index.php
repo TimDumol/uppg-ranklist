@@ -31,7 +31,7 @@
 
     $stmt = $dbh->prepare("SELECT name, uva_id, euler_id, euler_solved FROM ranks");
     if ($stmt->execute()) {
-      echo 'userJSON = ', json_encode($stmt->fetchAll());
+      echo 'userJSON = '. json_encode($stmt->fetchAll()) . ';';
     }
 
     $dbh = null;

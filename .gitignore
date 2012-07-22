@@ -1,2 +1,3 @@
 build/
-!build/index.html
+!build/add_user.php
+!build/index.php

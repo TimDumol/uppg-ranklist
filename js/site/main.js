@@ -30,7 +30,7 @@ $(function() {
         delete attrs.uva;
       }
       if (typeof(attrs.uva_id) !== 'undefined') {
-        user.uva.id = attrs.uva_id;
+        user.uva.id = +attrs.uva_id;
         delete attrs.uva_id;
       }
       user.euler = Object.create(User.euler);
@@ -42,8 +42,8 @@ $(function() {
         user.euler.id = attrs.euler_id;
         delete attrs.euler_id;
       }
-      if (typeof(attrs.euler_solved) !== 'undefined') {
-        user.euler.solved = attrs.euler_solved;
+      if (typeof(attrs.euler_solved) !== 'undefined' && attrs.euler_solved != null) {
+        user.euler.solved = +attrs.euler_solved;
         delete attrs.euler_solved;
       }
       // Copy everything else

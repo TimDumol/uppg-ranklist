@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>UP Programming Guild Rankings</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="UP Programming Guild Rankings">
+  <meta name="author" content="Tim Joseph Dumol">
 
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -22,16 +22,16 @@
   <script type="text/javascript" src="js/libs/humane.js"></script>
   <script type="text/javascript" src="js/libs/soyutils.js"></script>
   <script type="text/javascript" src="js/site/templates.js"></script>
-  <script type="text/javsacript">
+  <script type="text/javascript">
     <?php
     require_once 'config.php';
     $dbh = new PDO($db_info, $db_user, $db_password, array(
       PDO::ATTR_PERSISTENT => true
     ));
 
-    $stmt = $dbh->prepare("SELECT name, uva_id, euler_id, euler_solved FROM ranks");
+    $stmt = $dbh->prepare("SELECT name, uva_id, euler_id, euler_solved, retired, probie FROM ranks");
     if ($stmt->execute()) {
-      echo 'userJSON = '. json_encode($stmt->fetchAll()) . ';';
+      echo 'var userJSON = '. json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)) . ';';
     }
 
     $dbh = null;

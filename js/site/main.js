@@ -66,7 +66,7 @@ $(function() {
             if (typeof(data) === 'string') data = $.parseJSON(data);
             if (typeof(data.subs) === 'string') data.subs = $.parseJSON(data.subs);
             $.extend(self, data);
-            self.subs.sort(function(x,y) { return x[4] - y[4]; });
+            self.subs.sort(function(x,y) { return typeof(x) === 'undefined' ? y : (typeof(y) === 'undefined' ? x : x[4] - y[4]); });
             self.tried = 0;
             var map = {};
             for (var i = 0; i < self.subs.length; ++i) {

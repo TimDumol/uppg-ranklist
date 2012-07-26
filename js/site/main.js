@@ -108,9 +108,9 @@ $(function() {
       var self = this;
       var rendered = $(tmpl.user({
             user: self,
-            lastUvaSubHumane: self.uva.subs ? humaneDate(new Date(self.uva.subs[self.uva.subs.length-1][4]*1000)).
+            lastUvaSubHumane: (self.uva.subs && self.uva.subs.length > 0) ? humaneDate(new Date(self.uva.subs[self.uva.subs.length-1][4]*1000)).
             toLowerCase() : "",
-            lastUvaSub: self.uva.subs ? (new Date(self.uva.subs[self.uva.subs.length-1][4]*1000)).toString() : ""
+            lastUvaSub: (self.uva.subs && self.uva.subs.length > 0) ? (new Date(self.uva.subs[self.uva.subs.length-1][4]*1000)).toString() : ""
       }));
       if (typeof(self.el) !== 'undefined') {
         self.el.replaceWith(rendered);

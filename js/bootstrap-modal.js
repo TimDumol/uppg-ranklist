@@ -40,52 +40,51 @@
       }
 
     , show: function () {
-        var that = this
+        var that = this;
 
-        if (this.isShown) return
+        if (this.isShown) return;
 
-        $('body').addClass('modal-open')
+        $('body').addClass('modal-open');
 
-        this.isShown = true
-        this.$element.trigger('show')
+        this.isShown = true;
+        this.$element.trigger('show');
 
-        escape.call(this)
+        escape.call(this);
         backdrop.call(this, function () {
-          var transition = $.support.transition && that.$element.hasClass('fade')
+          var transition = $.support.transition && that.$element.hasClass('fade');
 
-          !that.$element.parent().length && that.$element.appendTo(document.body) //don't move modals dom position
+          !that.$element.parent().length && that.$element.appendTo(document.body); //don't move modals dom position
 
-          that.$element
-            .show()
+          that.$element.show();
 
           if (transition) {
-            that.$element[0].offsetWidth // force reflow
+            that.$element[0].offsetWidth; // force reflow
           }
 
-          that.$element.addClass('in')
+          that.$element.addClass('in');
 
           transition ?
             that.$element.one($.support.transition.end, function () { that.$element.trigger('shown') }) :
-            that.$element.trigger('shown')
+            that.$element.trigger('shown');
 
-        })
+        });
       }
 
     , hide: function ( e ) {
-        e && e.preventDefault()
+        e && e.preventDefault();
 
-        if (!this.isShown) return
+        if (!this.isShown) return;
 
-        var that = this
-        this.isShown = false
+        var that = this;
+        this.isShown = false;
 
-        $('body').removeClass('modal-open')
+        $('body').removeClass('modal-open');
 
-        escape.call(this)
+        escape.call(this);
 
         this.$element
           .trigger('hide')
-          .removeClass('in')
+          .removeClass('in');
 
         $.support.transition && this.$element.hasClass('fade') ?
           hideWithTransition.call(this) :

@@ -1,3 +1,5 @@
-build/
-!build/add_user.php
-!build/index.php
+ranklist/static/
+ranklist.egg-info
+js/site/coffee.js
+js/site/templates.js
+*.pyc

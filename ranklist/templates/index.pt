@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
 
@@ -13,31 +14,16 @@
   <!-- Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
 
-  <script type="text/javascript" src="js/libs/jquery-1.7.1.js"></script>
-  <script type="text/javascript" src="js/bootstrap-button.js"></script>
-  <script type="text/javascript" src="js/libs/es5-shim.js"></script>
-  <script type="text/javascript" src="js/libs/underscore.js"></script>
-  <script type="text/javascript" src="js/libs/humane.js"></script>
-  <script type="text/javascript" src="js/libs/soyutils.js"></script>
-  <script type="text/javascript" src="js/site/templates.js"></script>
-  <script type="text/javascript">
-    <?php
-    require_once 'config.php';
-    $dbh = new PDO($db_info, $db_user, $db_password, array(
-      PDO::ATTR_PERSISTENT => true
-    ));
-
-    $stmt = $dbh->prepare("SELECT name, uva_id, euler_id, euler_solved, retired, probie FROM ranks");
-    if ($stmt->execute()) {
-      echo 'var userJSON = '. json_encode($stmt->fetchAll(PDO::FETCH_ASSOC)) . ';';
-    }
-
-    $dbh = null;
-    ?>
-  </script>
-  <script type="text/javascript" src="js/site/main.js"></script>
+  <script type="text/javascript" src="/static/js/libs/jquery.js"></script>
+  <script type="text/javascript" src="/static/js/bootstrap-button.js"></script>
+  <script type="text/javascript" src="/static/js/libs/es5-shim.js"></script>
+  <script type="text/javascript" src="/static/js/libs/underscore.js"></script>
+  <script type="text/javascript" src="/static/js/libs/humane.js"></script>
+  <script type="text/javascript" src="/static/js/libs/soyutils.js"></script>
+  <script type="text/javascript" src="/static/js/site/templates.js"></script>
+  <script type="text/javascript" src="/static/js/site/coffee.js"></script>
 </head>
 
 <body>
@@ -71,10 +57,13 @@
           <thead>
             <tr>
               <th rowspan="2">Name</th>
+              <th colspan="2">Codeforces</th> 
               <th colspan="8">UVa</th>
               <th colspan="3">Project Euler</th>
             </tr>
             <tr>
+              <th>ID</th>
+              <th>Ranking</th>
               <th>Global Rank</th>
               <th>Local Rank</th>
               <th>ID</th>

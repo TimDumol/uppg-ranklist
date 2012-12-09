@@ -1,12 +1,3 @@
-<?php
-require_once 'config.php';
-
-session_start();
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-if ($method === 'POST' || $method === 'GET') {
-?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -22,7 +13,10 @@ if ($method === 'POST' || $method === 'GET') {
         <!-- Mobile viewport optimized: j.mp/bplateviewport -->
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script type="text/javascript">
+${users}
+        </script>
     </head>
     <body>
         <header class="navbar navbar-fixed-top">
@@ -35,40 +29,6 @@ if ($method === 'POST' || $method === 'GET') {
         <div id="main" role="main" class="container">
             <div class="content">
                 <div class="row">
-<?php
-    if ($method === 'POST') {
-        if (!isset($_SESSION['ranklist_logged_in']) ||
-            !$_SESSION['ranklist_logged_in']) {
-                if ($_POST['admin_password'] === $ranklist_pwd) {
-                    $_SESSION['ranklist_logged_in'] = true;   
-                } else {
-                    echo '<p>Error: Admin password does not match configuration.</p>';
-                }
-        }
-        if ($_SESSION['ranklist_logged_in']) {
-            $dbh = new PDO($db_info, $db_user, $db_password, array(
-                PDO::ATTR_PERSISTENT => true
-            ));
-            $stmt = $dbh->prepare("INSERT INTO ranks (name, uva_id, euler_id, retired, probie) VALUES (:name, :uva_id, :euler_id, :retired, :probie)");
-            $name = $_POST['name'];
-            $uva_id = $_POST['uva_id'];
-            $euler_id = $_POST['euler_id'];
-            $retired = isset($_POST['retired']) && $_POST['retired'] === 'on';
-            $probie = isset($POST['probie']) && $_POST['probie'] === 'on';
-            $stmt->bindParam('name', $name);
-            $stmt->bindParam('uva_id', $uva_id);
-            $stmt->bindParam('euler_id', $euler_id);
-            $stmt->bindParam('retired', $retired);
-            $stmt->bindParam('probie', $probie);
-            if ($stmt->execute()) {
-                echo '<p>Successfully added user</p>';
-            } else {
-                echo '<p>Failed to add user:</p>';
-                echo '<p>' . $dbh->errorInfo()[1] . '</p>';
-            }
-        }
-    }
-?>
                     <form method="POST" action".">
                         <div>
                             <label>Name</label>
@@ -88,14 +48,10 @@ if ($method === 'POST' || $method === 'GET') {
                         <div>
                             <input type="checkbox" name="probie"><label>Probie</label>
                         </div>
-<?php
-    if (!isset($_SESSION['ranklist_logged_in']) ||
-        !$_SESSION['ranklist_logged_in']) { ?>
                         <div>
                             <label>Admin Password:</label>
                             <input type="password" name="admin_password">
                         </div>
-<?php } ?>
                         <div>
                             <button type="submit">Add User</button>
                         </div>
@@ -115,7 +71,3 @@ if ($method === 'POST' || $method === 'GET') {
         <![endif]-->
     </body>
 </html>
-<?php
-} else {
-    header('HTTP/1.1 405 Method Not Allowed');
-}

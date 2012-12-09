@@ -1,30 +1,29 @@
 {namespace tmpl}
 
 /**
- * Renders the User
- * @param user The User
- * @param lastUvaSub last uva submission
- * @param lastUvaSubHumane last uva submission - humaneDate
- */
+* Renders the User
+* @param user The User
+* @param lastUvaSubHumane last uva submission - humaneDate
+*/
 {template .user}
-<tr>
-  <td>{$user.name}</td>
-  <td>{$user.uva.rank}</td>
-  <td>{$user.uva.lrank}</td>
-  <td>{$user.uva.id}</td>
-  <td><a href="http://uhunt.felix-halim.net/id/{$user.uva.id}">{$user.uva.username}</a></td>
-  <td>{$user.uva.ac}</td>
-  <td>{$user.uva.nos}</td>
-  <td>{$user.uva.tried}</td>
-  <td><a title="{$lastUvaSub}">{$lastUvaSubHumane}</a></td>
-  {if $user.euler.id}
-      <td>{$user.euler.lrank}</td>
-      <td><a href="http://projecteuler.net/profile/{$user.euler.id}.png">{$user.euler.id}</a></td>
-      <td>{$user.euler.solved}</td>
-  {else}
-      <td></td>
-      <td></td>
-      <td></td>
-  {/if}
-</tr>
+<td>{$user.name}</td>
+<td>{$user.cf_id}</td>
+<td>{$user.cf_ranking}</td> 
+<td>{$user.uva_grank}</td>
+<td>{$user.uva_lrank}</td>
+<td>{$user.uva_id}</td>
+<td><a href="http://uhunt.felix-halim.net/id/{$user.uva_id}">{$user.uva_username}</a></td>
+<td>{$user.uva_ac}</td>
+<td>{$user.uva_nsubs}</td>
+<td>{$user.uva_ntried}</td>
+<td><a title="{$user.uva_last_sub}">{$lastUvaSubHumane}</a></td>
+{if $user.euler_id}
+<td>{$user.euler_lrank}</td>
+<td><a href="http://projecteuler.net/profile/{$user.euler_id}.png">{$user.euler_id}</a></td>
+<td>{$user.euler_solved}</td>
+{else}
+<td></td>
+<td></td>
+<td></td>
+{/if}
 {/template}

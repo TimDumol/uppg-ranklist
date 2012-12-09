@@ -22,8 +22,6 @@ from sqlalchemy.orm import (
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
-from ranklist.guid import GUID
-
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
@@ -37,11 +35,11 @@ class Rank(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(length=64),
                   nullable=False)
-    uva_id = Column(GUID, unique=True, nullable=True)
+    uva_id = Column(Integer, unique=True, nullable=True)
     uva_uname = Column(String(length=64), unique=True, nullable=True)
     uva_ac = Column(Integer, nullable=True)
     uva_nsubs = Column(Integer, nullable=True)
-    uva_ntries = Column(Integer, nullable=True)
+    uva_ntried = Column(Integer, nullable=True)
     uva_grank = Column(Integer, nullable=True)
     uva_last_sub = Column(DateTime)
     euler_id = Column(String(length=64), unique=True)
@@ -71,7 +69,7 @@ class Rank(Base):
 
 class Group(Base):
     __tablename__ = 'groups'
-    id = Column(GUID, primary_key=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String(length=64))
 
     def __init__(self, name):

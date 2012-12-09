@@ -5,21 +5,6 @@ tmpl = window.tmpl
 $.ajaxSetup error: (jqXHR, status, error) ->
   $("#generic-ajax-error").show().delay(2000).hide "fast"
 
-class ProgressBar extends Spine.Controller
-  constructor: ->
-    super
-    @progress = 0
-  
-  render: =>
-    percent = Math.round(@progress * 100)
-    $("#progress-text").html percent + "%"
-    $("#progress-bar").css "width", percent + "%"
-    if percent is 100
-      $("#progress-text").css "left", "40%"
-    else
-      $("#progress-text").css "left", "45%"
-
-
 #/ An Euler/UVa user
 class User extends Spine.Model
   @configure 'User', 'name', 'uva_id', 'uva_uname',
@@ -30,6 +15,7 @@ class User extends Spine.Model
     'cf_nrounds'
 
   @extend Spine.Model.Ajax
+
 
 # An item in the table
 class UserItem extends Spine.Controller
@@ -59,29 +45,34 @@ class Users extends Spine.Controller
     super
     User.bind('refresh', @addAll)
     User.bind('create', @addOne)
+    User.bind('fetch', @onFetch)
+    @items = []
   
-  addOne: (item) =>
-    @append(new UserItem(item: item).render())
+  @_sortHelper: (a, b) ->
+    if a.uva_ac != b.uva_ac then a.uva_ac > b.uva_ac else a.uva_nsubs < b.uva_nsubs
+
+  # Sort the users
+  sort: ->
+    @items.sort(@_sortHelper)
+
+  render: =>
+    @html('')
+    for item in @items
+      @append(item.render())
+
+  addOne: (user) =>
+    item = new UserItem(item: user)
+    @items.push(item)
+    @sort()
+    @render()
 
   addAll: =>
     @html('')
     User.each(@addOne)
+  
+  onFetch: =>
+    @$('tr').addClass('awesome')
+
+
 
 User.fetch()
-
-users = undefined
-updateAndRenderAll = ->
-  updateProgress 0
-  $("#refresh-rankings").button "loading"
-  nUpdated = 0
-  $.each users.fetch(), (idx, def) ->
-    def.done ->
-      ++nUpdated
-      updateProgress nUpdated / users.list.length
-      $("#refresh-rankings").button "reset"  if nUpdated is users.list.length
-      users.updateUvaRanks()
-      users.render()
-
-users.el = $("#users tbody")
-updateAndRenderAll()
-$("#refresh-rankings").click updateAndRenderAll

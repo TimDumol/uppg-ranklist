@@ -16,10 +16,26 @@ from .encoder import (
 
 @view_config(route_name='home', renderer='templates/index.pt')
 def home(request):
-    users = DBSession.query(Rank)
-    return {'user_json': Encoder().encode(users.all())}
-
-
-@view_config(route_name='add_user', renderer='templates/add_user.pt')
-def add_user(request):
     return {}
+
+
+@view_config(route_name='users', request_method='GET')
+def get_users(request):
+    return Encoder().encode(Rank.all())
+
+
+@view_config(route_name='users', request_method='POST')
+def post_user(request):
+    pass
+
+
+@view_config(route_name='users/{id}', request_method='PUT')
+def put_user(request):
+    id = request.matchdict['id']
+    rank = DBSession.query(Rank).get(id)
+
+
+@view_config(route_name='users/{id}', request_method='DELETE')
+def delete_user(request):
+    id = request.matchdict['id']
+    DBSession.query(Rank).filter(Rank.id == id).delete()

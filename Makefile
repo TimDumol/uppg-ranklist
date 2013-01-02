@@ -11,9 +11,9 @@ JS=libs/jquery.js\
 	 libs/soyutils.js bootstrap-alert.js bootstrap-button.js bootstrap-dropdown.js\
 	 bootstrap-modal.js bootstrap-popover.js bootstrap-scrollspy.js\
 	 bootstrap-tab.js
-COFFEE=js/libs/spine/src/spine.coffee js/libs/spine/src/ajax.coffee js/libs/spine/src/list.coffee\
+COFFEE=js/libs/spine/src/spine.coffee js/libs/spine/src/route.coffee js/libs/spine/src/list.coffee\
 	   js/libs/spine/src/local.coffee js/libs/spine/src/manager.coffee\
-	   js/libs/spine/src/relation.coffee js/libs/spine/src/route.coffee\
+	   js/libs/spine/src/relation.coffee js/libs/spine/src/ajax.coffee\
 	    js/site/main.coffee
 JS_FULL=${JS:%=ranklist/static/js/%}
 all: ranklist/static ${JS_FULL} ranklist/static/js/site/coffee.js

@@ -44,27 +44,27 @@ class Rank(Base):
     uva_last_sub = Column(DateTime)
     euler_id = Column(String(length=64), unique=True)
     euler_solved = Column(Integer(), nullable=True)
-    codeforces_id = Column(String(length=64), unique=True)
-    codeforces_rating = Column(Integer, nullable=True)
-    codeforces_nrounds = Column(Integer, nullable=True)
+    cf_id = Column(String(length=64), unique=True)
+    cf_rating = Column(Integer, nullable=True)
     groups = relationship('Group', secondary=ranks_groups, backref='members')
 
-    def __init__(self, name, retired, probie,
-                 uva_id=None, euler_id=None, codeforces_id=None):
+    def __init__(self, name,
+                 uva_id=None, euler_id=None, cf_id=None):
         self.name = name
         self.uva_id = uva_id
         self.euler_id = euler_id
-        self.codeforces_id = codeforces_id
+        self.cf_id = cf_id
 
-    _dict_columns = ('name', 'uva_id', 'uva_uname',
-                     'uva_ac', 'uva_nsubs', 'uva_ntries',
+    _dict_columns = ('id', 'name', 'uva_id', 'uva_uname',
+                     'uva_ac', 'uva_nsubs', 'uva_ntried',
                      'uva_grank', 'uva_last_sub',
                      'euler_id', 'euler_solved',
-                     'codeforces_id', 'codeforces_rating',
-                     'codeforces_nrounds')
+                     'cf_id', 'cf_rating',)
 
     def to_dict(self):
-        return {key: getattr(self, key) for key in self._dict_columns}
+        d = {key: getattr(self, key) for key in self._dict_columns}
+        d['groups'] = [g.name for g in self.groups]
+        return d
 
 
 class Group(Base):
